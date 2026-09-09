@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
@@ -8,9 +9,9 @@ import { services } from "@/data/services";
 import { buildMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Usługi",
+  title: "Fotografia komercyjna Lublin — oferta",
   description:
-    "Fotografia gastronomiczna, wnętrz i hoteli, portretowa, biznesowa, eventowa oraz content dla social media. Fotograf Lublin — wycena indywidualna.",
+    "Fotografia komercyjna w Lublinie: gastronomia, wnętrza i hotele, portret, biznes, eventy oraz content dla social media. Zobacz zakres usług i realizacje.",
   path: "/uslugi",
 });
 
@@ -19,9 +20,10 @@ export default function UslugiPage() {
     <div className="pb-24 pt-36 sm:pb-32 sm:pt-44">
       <Container>
         <SectionHeading
+          as="h1"
           eyebrow="Usługi"
-          title="Oferta dopasowana do celu"
-          description="Każda usługa wygląda inaczej w zależności od branży i odbiorcy — poniżej znajdziesz zakres i typowe zastosowania."
+          title="Fotografia komercyjna Lublin"
+          description="Fotografia dla restauracji, hoteli, firm, marek i klientów indywidualnych — każda usługa ma osobną stronę z zakresem, zastosowaniem i portfolio."
         />
       </Container>
 
@@ -47,7 +49,7 @@ export default function UslugiPage() {
 
               <RevealOnScroll delay={0.1}>
                 <span className="eyebrow text-stone">{String(idx + 1).padStart(2, "0")}</span>
-                <h2 className="mt-4 text-display-3 font-light">{service.title}</h2>
+                <h2 className="mt-4 text-display-3 font-light">{service.seoTitle}</h2>
                 <p className="mt-5 max-w-lg text-stone">{service.description}</p>
                 <ul className="mt-6 flex flex-col gap-2 text-sm">
                   {service.useCases.map((useCase) => (
@@ -58,10 +60,15 @@ export default function UslugiPage() {
                   ))}
                 </ul>
                 <div className="mt-8 flex flex-wrap items-center gap-4">
+                  <Link
+                    href={`/uslugi/${service.seoSlug}`}
+                    className="text-sm uppercase tracking-widest2 link-underline"
+                  >
+                    Poznaj usługę →
+                  </Link>
                   <Button href="/kontakt" variant="primary">
                     Zapytaj o wycenę
                   </Button>
-                  <span className="text-sm text-stone">Wycena indywidualna</span>
                 </div>
               </RevealOnScroll>
             </Container>

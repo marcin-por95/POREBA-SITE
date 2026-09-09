@@ -18,9 +18,9 @@ export default function ServicesTeaser() {
 
         <div className="mt-14 grid gap-px overflow-hidden bg-mist/40 sm:grid-cols-2 lg:grid-cols-3">
           {services.slice(0, 6).map((service, idx) => (
-            <RevealOnScroll key={service.slug} delay={idx * 0.05} y={12}>
+            <RevealOnScroll key={service.seoSlug} delay={idx * 0.05} y={12}>
               <Link
-                href={`/uslugi#${service.slug}`}
+                href={`/uslugi/${service.seoSlug}`}
                 className="group flex h-full flex-col justify-between bg-bone p-8 transition-colors duration-500 hover:bg-ink hover:text-bone"
               >
                 <div>

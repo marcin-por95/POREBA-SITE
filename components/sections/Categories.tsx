@@ -29,7 +29,7 @@ export default function Categories() {
           {categoryOrder.map((category, idx) => (
             <RevealOnScroll key={category} delay={idx * 0.06}>
               <Link
-                href={`/portfolio?kategoria=${category}`}
+                href={`/portfolio/${category}`}
                 className="group relative block aspect-square overflow-hidden"
               >
                 <Image

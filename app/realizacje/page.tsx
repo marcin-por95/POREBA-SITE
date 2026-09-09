@@ -9,9 +9,9 @@ import { categoryLabels } from "@/types/project";
 import { buildMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Realizacje",
+  title: "Realizacje fotograficzne Lublin",
   description:
-    "Wybrane realizacje: hotele, restauracje, sesje portretowe i eventy firmowe zrealizowane w Lublinie i całej Polsce.",
+    "Wybrane realizacje fotograficzne PØREBA Fotografia: hotele, restauracje, sesje portretowe i eventy firmowe w Lublinie oraz całej Polsce.",
   path: "/realizacje",
 });
 
@@ -22,9 +22,10 @@ export default function RealizacjePage() {
     <div className="pb-24 pt-36 sm:pb-32 sm:pt-44">
       <Container>
         <SectionHeading
+          as="h1"
           eyebrow="Realizacje"
-          title="Projekty od podszewki"
-          description="Pełne historie wybranych współprac — od briefu, przez sesję, po gotowy materiał."
+          title="Realizacje fotograficzne — Lublin i cała Polska"
+          description="Pełne historie wybranych współprac: hotele, restauracje, portrety i wydarzenia — od briefu, przez sesję, po gotowy materiał."
         />
 
         <div className="mt-16 flex flex-col divide-y divide-mist/40">
@@ -45,7 +46,7 @@ export default function RealizacjePage() {
                 </div>
                 <div>
                   <span className="eyebrow text-stone">
-                    {categoryLabels[project.category]} · {project.year}
+                    {categoryLabels[project.category]} · {project.location} · {project.year}
                   </span>
                   <h2 className="mt-3 font-serif text-3xl sm:text-4xl">{project.title}</h2>
                   <p className="mt-4 max-w-lg text-stone">{project.description}</p>
