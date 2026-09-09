@@ -1,11 +1,12 @@
 export const site = {
-  name: "Pøreba Fotografia",
-  shortName: "Pøreba",
-  legalName: "Pøreba Fotografia",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://porebafotografia.pl",
+  name: "PØREBA Fotografia",
+  shortName: "PØREBA",
+  legalName: "PØREBA Fotografia",
+  owner: "Marcin Poręba",
+  url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://porebafotografia.pl").replace(/\/$/, ""),
 
   description:
-    "Fotografia portretowa, gastronomiczna, wnętrzarska, eventowa i biznesowa w Lublinie i całej Polsce. Content foto i wideo dla marek.",
+    "Fotograf w Lublinie specjalizujący się w fotografii gastronomicznej, wnętrz i hoteli, biznesowej, portretowej oraz eventowej. Profesjonalny content foto i wideo dla firm i marek w Lublinie i całej Polsce.",
 
   tagline: "Fotografia, która buduje wizerunek.",
 
@@ -38,5 +39,7 @@ export const site = {
     "Fotograf wnętrz Lublin",
     "Fotografia biznesowa Lublin",
     "Fotograf eventowy Lublin",
+    "Fotografia hotelowa Lublin",
+    "Fotograf portretowy Lublin",
   ],
 } as const;
