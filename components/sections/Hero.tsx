@@ -38,7 +38,7 @@ export default function Hero() {
   }, [shouldReduceMotion]);
 
   return (
-    <section className="relative flex h-[100svh] min-h-[640px] w-full items-end overflow-hidden bg-ink">
+    <section className="hero-mobile-section relative flex h-[100svh] min-h-[640px] w-full items-end overflow-hidden bg-ink">
       {heroImages.map((img, i) => (
         <motion.div
           key={img.src}
@@ -60,9 +60,10 @@ export default function Hero() {
               src={img.src}
               alt=""
               fill
-              priority={i === 0}
               sizes="100vw"
               aria-hidden="true"
+              loading="lazy"
+              quality={45}
               className="object-cover blur-lg brightness-[0.42] saturate-[0.8]"
             />
           </motion.div>
@@ -82,6 +83,7 @@ export default function Hero() {
                 alt={img.alt}
                 fill
                 priority={i === 0}
+                loading={i === 0 ? undefined : "lazy"}
                 sizes="(max-width: 640px) 94vw, (max-width: 1024px) 92vw, 40vw"
                 className="object-cover"
                 style={{ objectPosition: img.position }}
@@ -94,7 +96,7 @@ export default function Hero() {
       <div className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-r from-ink/90 via-ink/35 to-transparent" />
       <div className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-t from-ink/70 via-transparent to-ink/20" />
 
-      <div className="container-editorial relative z-10 pb-20 pt-40 sm:pb-28">
+      <div className="hero-mobile-content container-editorial relative z-10 pb-20 pt-40 sm:pb-28">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -104,24 +106,24 @@ export default function Hero() {
 
           <h1 className="mt-5 font-serif font-light text-bone">
             <span
-              className="block text-display-1 italic sm:whitespace-nowrap"
+              className="hero-mobile-title-main block text-display-1 italic sm:whitespace-nowrap"
               style={{ lineHeight: 1.02 }}
             >
               Fotograf Lublin
             </span>
             <span
-              className="mt-4 block text-display-3 not-italic tracking-[0.2em]"
+              className="hero-mobile-title-brand mt-4 block text-display-3 not-italic tracking-[0.2em]"
               style={{ lineHeight: 1.15 }}
             >
               PØREBA FOTOGRAFIA
             </span>
           </h1>
 
-          <p className="mt-7 max-w-lg text-lg text-bone/80 sm:text-xl">
+          <p className="hero-mobile-copy mt-7 max-w-lg text-lg text-bone/80 sm:text-xl">
             Fotografia gastronomiczna, wnętrz, hoteli, biznesowa i portretowa — materiały, które budują wizerunek.
           </p>
 
-          <div className="mt-10 flex flex-wrap gap-4">
+          <div className="hero-mobile-actions mt-10 flex flex-wrap gap-4">
             <Button href="/portfolio" variant="primary" className="bg-bone text-ink hover:bg-mist">
               Zobacz portfolio
             </Button>
