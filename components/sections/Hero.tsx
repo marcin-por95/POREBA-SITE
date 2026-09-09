@@ -67,7 +67,7 @@ export default function Hero() {
             />
           </motion.div>
 
-          <div className="absolute inset-[3%] overflow-hidden sm:inset-[4%] lg:inset-[5%] xl:inset-[6%]">
+          <div className="absolute inset-[3%] overflow-hidden sm:inset-[4%] lg:bottom-[5%] lg:left-[56%] lg:right-[4%] lg:top-[5%] xl:bottom-[6%] xl:right-[5%] xl:top-[6%]">
             <motion.div
               className="absolute inset-0"
               animate={
@@ -82,7 +82,7 @@ export default function Hero() {
                 alt={img.alt}
                 fill
                 priority={i === 0}
-                sizes="(max-width: 640px) 94vw, (max-width: 1024px) 92vw, (max-width: 1280px) 90vw, 88vw"
+                sizes="(max-width: 640px) 94vw, (max-width: 1024px) 92vw, 40vw"
                 className="object-cover"
                 style={{ objectPosition: img.position }}
               />
@@ -102,14 +102,22 @@ export default function Hero() {
         >
           <p className="eyebrow text-bone/70">Fotograf · Lublin i cała Polska</p>
 
-          <h1 className="mt-5 font-serif text-display-1 font-light italic text-bone">
-            Fotograf Lublin
-            <span className="mt-1 block text-display-3 not-italic tracking-[0.2em]">
+          <h1 className="mt-5 font-serif font-light text-bone">
+            <span
+              className="block text-display-1 italic sm:whitespace-nowrap"
+              style={{ lineHeight: 1.02 }}
+            >
+              Fotograf Lublin
+            </span>
+            <span
+              className="mt-4 block text-display-3 not-italic tracking-[0.2em]"
+              style={{ lineHeight: 1.15 }}
+            >
               PØREBA FOTOGRAFIA
             </span>
           </h1>
 
-          <p className="mt-6 max-w-lg text-lg text-bone/80 sm:text-xl">
+          <p className="mt-7 max-w-lg text-lg text-bone/80 sm:text-xl">
             Fotografia gastronomiczna, wnętrz, hoteli, biznesowa i portretowa — materiały, które budują wizerunek.
           </p>
 
