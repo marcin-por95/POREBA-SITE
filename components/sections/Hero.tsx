@@ -9,14 +9,17 @@ const heroImages = [
   {
     src: "/images/hero/hero-01.jpg",
     alt: "Fotografia portretowa — PØREBA Fotografia",
+    position: "center 42%",
   },
   {
     src: "/images/hero/hero-02.jpg",
     alt: "Fotografia gastronomiczna — PØREBA Fotografia",
+    position: "center center",
   },
   {
     src: "/images/hero/hero-03.jpg",
     alt: "Fotografia wnętrz — PØREBA Fotografia",
+    position: "center center",
   },
 ];
 
@@ -65,7 +68,7 @@ export default function Hero() {
           </motion.div>
 
           <motion.div
-            className="absolute inset-[3%] sm:inset-[4%] lg:inset-[5%] xl:inset-[6%]"
+            className="absolute left-1/2 top-1/2 h-[88%] w-[94%] -translate-x-1/2 -translate-y-1/2 overflow-hidden sm:h-[88%] sm:w-[92%] lg:h-[88%] lg:w-[90%] xl:w-[88%]"
             animate={
               active === i && !shouldReduceMotion
                 ? { scale: [0.97, 1] }
@@ -78,8 +81,9 @@ export default function Hero() {
               alt={img.alt}
               fill
               priority={i === 0}
-              sizes="100vw"
-              className="object-contain object-center lg:object-right"
+              sizes="(max-width: 640px) 94vw, (max-width: 1024px) 92vw, (max-width: 1280px) 90vw, 88vw"
+              className="object-cover"
+              style={{ objectPosition: img.position }}
             />
           </motion.div>
         </motion.div>
