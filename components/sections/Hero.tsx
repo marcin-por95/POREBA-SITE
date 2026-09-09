@@ -67,25 +67,27 @@ export default function Hero() {
             />
           </motion.div>
 
-          <motion.div
-            className="absolute left-1/2 top-1/2 h-[88%] w-[94%] -translate-x-1/2 -translate-y-1/2 overflow-hidden sm:h-[88%] sm:w-[92%] lg:h-[88%] lg:w-[90%] xl:w-[88%]"
-            animate={
-              active === i && !shouldReduceMotion
-                ? { scale: [0.97, 1] }
-                : { scale: 1 }
-            }
-            transition={{ duration: 5.5, ease: "linear" }}
-          >
-            <Image
-              src={img.src}
-              alt={img.alt}
-              fill
-              priority={i === 0}
-              sizes="(max-width: 640px) 94vw, (max-width: 1024px) 92vw, (max-width: 1280px) 90vw, 88vw"
-              className="object-cover"
-              style={{ objectPosition: img.position }}
-            />
-          </motion.div>
+          <div className="absolute inset-[3%] overflow-hidden sm:inset-[4%] lg:inset-[5%] xl:inset-[6%]">
+            <motion.div
+              className="absolute inset-0"
+              animate={
+                active === i && !shouldReduceMotion
+                  ? { scale: [0.97, 1] }
+                  : { scale: 1 }
+              }
+              transition={{ duration: 5.5, ease: "linear" }}
+            >
+              <Image
+                src={img.src}
+                alt={img.alt}
+                fill
+                priority={i === 0}
+                sizes="(max-width: 640px) 94vw, (max-width: 1024px) 92vw, (max-width: 1280px) 90vw, 88vw"
+                className="object-cover"
+                style={{ objectPosition: img.position }}
+              />
+            </motion.div>
+          </div>
         </motion.div>
       ))}
 
