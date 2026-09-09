@@ -12,13 +12,13 @@ export const site = {
     country: "Polska",
     serviceArea: "Lublin i okolice, realizacje w całej Polsce",
   },
-  contact: {
-    email: "kontakt@porebafotografia.pl",
-    instagram: {
-      handle: "@marcin_poreba_fotograf_lublin",
-      url: "https://www.instagram.com/marcin_poreba_fotograf_lublin/",
-    },
+ contact: {
+  email: "kontakt@porebafotografia.pl",
+  instagram: {
+    handle: "@marcin_poreba_fotograf_lublin",
+    url: "https://www.instagram.com/marcin_poreba_fotograf_lublin/",
   },
+},
   nav: [
     { label: "Portfolio", href: "/portfolio" },
     { label: "Realizacje", href: "/realizacje" },
