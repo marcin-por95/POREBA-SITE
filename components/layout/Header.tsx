@@ -72,7 +72,7 @@ export default function Header() {
           </nav>
 
           <button
-            className="flex flex-col gap-1.5 p-2 md:hidden"
+            className="flex h-12 w-12 flex-col items-center justify-center gap-1.5 md:hidden"
             aria-label="Otwórz menu"
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen(true)}

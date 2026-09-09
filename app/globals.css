@@ -57,6 +57,37 @@
   }
 }
 
+@media (orientation: landscape) and (max-height: 600px) and (max-width: 1024px) {
+  .hero-mobile-section {
+    min-height: 100svh !important;
+  }
+
+  .hero-mobile-content {
+    padding-top: 5.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+
+  .hero-mobile-title-main {
+    font-size: clamp(2.25rem, 7vw, 3.5rem) !important;
+  }
+
+  .hero-mobile-title-brand {
+    margin-top: 0.5rem !important;
+    font-size: clamp(1.35rem, 4vw, 2rem) !important;
+  }
+
+  .hero-mobile-copy {
+    margin-top: 0.75rem !important;
+    max-width: 34rem;
+    font-size: 0.95rem !important;
+    line-height: 1.45;
+  }
+
+  .hero-mobile-actions {
+    margin-top: 1rem !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
