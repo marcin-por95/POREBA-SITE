@@ -16,7 +16,7 @@ export const site = {
   email: "kontakt@porebafotografia.pl",
   instagram: {
     handle: "@marcin_poreba_fotograf_lublin",
-    url: "https://www.instagram.com/marcin_poreba_fotograf_lublin/",
+    url: "https://www.instagram.com/marcin_poreba_fotograf_lublin",
   },
 },
   nav: [
