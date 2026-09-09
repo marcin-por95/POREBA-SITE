@@ -5,16 +5,33 @@ import { notFound } from "next/navigation";
 import Container from "@/components/ui/Container";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import GalleryGrid from "@/components/portfolio/GalleryGrid";
-import { getAdjacentProject, getProjectBySlug, projects } from "@/data/projects";
+import {
+  getAdjacentProject,
+  getProjectBySlug,
+  projects,
+} from "@/data/projects";
 import { categoryLabels } from "@/types/project";
 import { buildMetadata } from "@/lib/metadata";
 
+type ProjectPageProps = {
+  params: Promise<{
+    slug: string;
+  }>;
+};
+
 export function generateStaticParams() {
-  return projects.map((project) => ({ slug: project.slug }));
+  return projects.map((project) => ({
+    slug: project.slug,
+  }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
-  const project = getProjectBySlug(params.slug);
+export async function generateMetadata({
+  params,
+}: ProjectPageProps): Promise<Metadata> {
+  const { slug } = await params;
+
+  const project = getProjectBySlug(slug);
+
   if (!project) return {};
 
   return buildMetadata({
@@ -25,12 +42,23 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   });
 }
 
-export default function ProjectPage({ params }: { params: { slug: string } }) {
-  const project = getProjectBySlug(params.slug);
-  if (!project) notFound();
+export default async function ProjectPage({
+  params,
+}: ProjectPageProps) {
+  const { slug } = await params;
+
+  const project = getProjectBySlug(slug);
+
+  if (!project) {
+    notFound();
+  }
 
   const next = getAdjacentProject(project.slug);
-  const galleryImages = project.gallery.map((img) => ({ ...img, category: project.category }));
+
+  const galleryImages = project.gallery.map((img) => ({
+    ...img,
+    category: project.category,
+  }));
 
   return (
     <article className="pb-24 pt-32 sm:pb-32 sm:pt-40">
@@ -43,21 +71,31 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           sizes="100vw"
           className="object-cover"
         />
+
         <div className="absolute inset-0 bg-ink/30" />
       </div>
 
       <Container className="mt-12">
         <RevealOnScroll>
           <span className="eyebrow text-stone">
-            {categoryLabels[project.category]} · {project.location} · {project.year}
+            {categoryLabels[project.category]} · {project.location} ·{" "}
+            {project.year}
           </span>
-          <h1 className="mt-4 text-display-2 font-light">{project.title}</h1>
-          <p className="mt-6 max-w-2xl text-lg text-stone">{project.description}</p>
+
+          <h1 className="mt-4 text-display-2 font-light">
+            {project.title}
+          </h1>
+
+          <p className="mt-6 max-w-2xl text-lg text-stone">
+            {project.description}
+          </p>
+
           <dl className="mt-8 grid max-w-md grid-cols-2 gap-6 border-t border-mist/40 pt-6 text-sm">
             <div>
               <dt className="eyebrow text-stone">Klient</dt>
               <dd className="mt-1">{project.client}</dd>
             </div>
+
             <div>
               <dt className="eyebrow text-stone">Lokalizacja</dt>
               <dd className="mt-1">{project.location}</dd>
@@ -71,8 +109,14 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
 
         {next && (
           <div className="mt-24 border-t border-mist/40 pt-10 text-center">
-            <p className="eyebrow text-stone">Następna realizacja</p>
-            <Link href={`/realizacje/${next.slug}`} className="mt-4 inline-block font-serif text-3xl link-underline">
+            <p className="eyebrow text-stone">
+              Następna realizacja
+            </p>
+
+            <Link
+              href={`/realizacje/${next.slug}`}
+              className="mt-4 inline-block font-serif text-3xl link-underline"
+            >
               {next.title} →
             </Link>
           </div>
