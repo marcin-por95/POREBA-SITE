@@ -7,9 +7,9 @@ import { site } from "@/data/site";
 import { buildMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Kontakt",
+  title: "Fotograf Lublin — kontakt i wycena",
   description:
-    "Skontaktuj się w sprawie sesji fotograficznej w Lublinie i całej Polsce — portret, gastronomia, wnętrza, event lub biznes.",
+    "Skontaktuj się z PØREBA Fotografia w sprawie sesji w Lublinie i całej Polsce — gastronomia, wnętrza, biznes, portret, event i content social media.",
   path: "/kontakt",
 });
 
@@ -20,8 +20,9 @@ export default function KontaktPage() {
         <div>
           <RevealOnScroll>
             <SectionHeading
+              as="h1"
               eyebrow="Kontakt"
-              title="Porozmawiajmy o projekcie"
+              title="Fotograf Lublin — kontakt i wycena sesji"
               description="Napisz kilka słów o tym, czego potrzebujesz — miejsce, przybliżony termin i zakres. Odpowiadam zwykle w ciągu 24 godzin."
             />
           </RevealOnScroll>
@@ -29,7 +30,7 @@ export default function KontaktPage() {
           <RevealOnScroll delay={0.1} className="mt-12 flex flex-col gap-6 border-t border-mist/40 pt-8">
             <div>
               <p className="eyebrow text-stone">Email</p>
-              <a href={`mailto:${site.contact.email}`} className="mt-1 block font-serif text-xl link-underline w-fit">
+              <a href={`mailto:${site.contact.email}`} className="mt-1 block w-fit font-serif text-xl link-underline">
                 {site.contact.email}
               </a>
             </div>
@@ -39,7 +40,7 @@ export default function KontaktPage() {
                 href={site.contact.instagram.url}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-1 block font-serif text-xl link-underline w-fit"
+                className="mt-1 block w-fit font-serif text-xl link-underline"
               >
                 {site.contact.instagram.handle}
               </a>
