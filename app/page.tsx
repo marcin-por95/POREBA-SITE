@@ -8,9 +8,9 @@ import ContactCTA from "@/components/sections/ContactCTA";
 import { buildMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Pøreba Fotografia — Fotograf Lublin | Portret, Gastronomia, Wnętrza",
+  title: "Fotograf Lublin — gastronomia, wnętrza, biznes i portret",
   description:
-    "Fotograf w Lublinie specjalizujący się w fotografii portretowej, gastronomicznej, wnętrzarskiej, eventowej i biznesowej. Zobacz portfolio i umów sesję.",
+    "Fotograf w Lublinie: fotografia gastronomiczna, wnętrz i hoteli, biznesowa, portretowa oraz eventowa. Profesjonalne zdjęcia dla firm, restauracji i marek.",
   path: "/",
 });
 
