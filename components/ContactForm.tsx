@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useActionState, useEffect, useRef, useState } from "react";
 import { sendContactMessage, type ContactFormState } from "@/app/kontakt/actions";
 import { cx } from "@/lib/utils";
@@ -159,6 +160,15 @@ export default function ContactForm() {
           )}
         </div>
       </div>
+
+      <p className="max-w-xl text-xs leading-relaxed text-stone">
+        Wysyłając formularz, przekazujesz dane w celu obsługi zapytania i przygotowania odpowiedzi lub
+        wyceny. Szczegóły dotyczące przetwarzania danych znajdziesz w{" "}
+        <Link href="/polityka-prywatnosci" className="link-underline text-graphite">
+          Polityce prywatności
+        </Link>
+        .
+      </p>
     </form>
   );
 }
