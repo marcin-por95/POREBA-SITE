@@ -38,7 +38,7 @@ export default function Hero() {
   }, [shouldReduceMotion]);
 
   return (
-    <section className="hero-mobile-section relative flex h-[100svh] min-h-[640px] w-full items-end overflow-hidden bg-ink">
+    <section className="hero-mobile-section relative flex h-[100svh] min-h-[620px] w-full items-end overflow-hidden bg-ink sm:min-h-[640px]">
       {heroImages.map((img, i) => (
         <motion.div
           key={img.src}
@@ -68,7 +68,7 @@ export default function Hero() {
             />
           </motion.div>
 
-          <div className="absolute inset-[3%] overflow-hidden sm:inset-[4%] lg:bottom-[5%] lg:left-[56%] lg:right-[4%] lg:top-[5%] xl:bottom-[6%] xl:right-[5%] xl:top-[6%]">
+          <div className="absolute inset-x-[3%] bottom-[2%] top-[5.25rem] overflow-hidden sm:inset-[4%] lg:bottom-[5%] lg:left-[56%] lg:right-[4%] lg:top-[5%] xl:bottom-[6%] xl:right-[5%] xl:top-[6%]">
             <motion.div
               className="absolute inset-0"
               animate={
@@ -93,46 +93,58 @@ export default function Hero() {
         </motion.div>
       ))}
 
-      <div className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-r from-ink/90 via-ink/35 to-transparent" />
-      <div className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-t from-ink/70 via-transparent to-ink/20" />
+      <div className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-r from-ink/95 via-ink/55 to-transparent sm:from-ink/90 sm:via-ink/35" />
+      <div className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-t from-ink/85 via-ink/10 to-ink/30 sm:from-ink/70 sm:via-transparent sm:to-ink/20" />
 
-      <div className="hero-mobile-content container-editorial relative z-10 pb-20 pt-40 sm:pb-28">
+      <div className="hero-mobile-content container-editorial relative z-10 pb-[max(2rem,env(safe-area-inset-bottom))] pt-0 sm:pb-28 sm:pt-40">
         <motion.div
+          className="max-w-[21rem] sm:max-w-none"
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
         >
-          <p className="eyebrow text-bone/70">Fotograf · Lublin i cała Polska</p>
+          <p className="eyebrow hidden text-bone/70 sm:block">Fotograf · Lublin i cała Polska</p>
 
-          <h1 className="mt-5 font-serif font-light text-bone">
+          <h1 className="mt-0 font-serif font-light text-bone sm:mt-5">
             <span
-              className="hero-mobile-title-main block text-display-1 italic sm:whitespace-nowrap"
+              className="hero-mobile-title-main block text-[clamp(2.65rem,12.5vw,3.25rem)] italic sm:text-display-1 sm:whitespace-nowrap"
               style={{ lineHeight: 1.02 }}
             >
               Fotograf Lublin
             </span>
             <span
-              className="hero-mobile-title-brand mt-4 block text-display-3 not-italic tracking-[0.2em]"
+              className="hero-mobile-title-brand mt-3 block whitespace-nowrap text-[clamp(1.05rem,4.8vw,1.35rem)] not-italic tracking-[0.14em] sm:mt-4 sm:text-display-3 sm:tracking-[0.2em]"
               style={{ lineHeight: 1.15 }}
             >
               PØREBA FOTOGRAFIA
             </span>
           </h1>
 
-          <p className="hero-mobile-copy mt-7 max-w-lg text-lg text-bone/80 sm:text-xl">
-            Fotografia gastronomiczna, wnętrz, hoteli, biznesowa i portretowa — materiały, które budują wizerunek.
+          <p className="hero-mobile-copy mt-5 max-w-[19rem] text-base leading-[1.55] text-bone/85 sm:mt-7 sm:max-w-lg sm:text-xl sm:leading-normal sm:text-bone/80">
+            <span className="sm:hidden">
+              Gastronomia · wnętrza · biznes · portret. Zdjęcia, które budują wizerunek.
+            </span>
+            <span className="hidden sm:inline">
+              Fotografia gastronomiczna, wnętrz, hoteli, biznesowa i portretowa — materiały, które budują wizerunek.
+            </span>
           </p>
 
-          <div className="hero-mobile-actions mt-10 flex flex-wrap gap-4">
-            <Button href="/portfolio" variant="primary" className="bg-bone text-ink hover:bg-mist">
-              Zobacz portfolio
+          <div className="hero-mobile-actions mt-7 flex flex-nowrap gap-3 sm:mt-10 sm:flex-wrap sm:gap-4">
+            <Button
+              href="/portfolio"
+              variant="primary"
+              className="!px-5 !py-3 !text-xs !tracking-[0.16em] bg-bone text-ink hover:bg-mist sm:!px-7 sm:!py-3.5 sm:!text-sm sm:!tracking-widest2"
+            >
+              <span className="sm:hidden">Portfolio</span>
+              <span className="hidden sm:inline">Zobacz portfolio</span>
             </Button>
             <Button
               href="/kontakt"
               variant="secondary"
-              className="border-bone text-bone hover:bg-bone hover:text-ink"
+              className="!px-5 !py-3 !text-xs !tracking-[0.16em] border-bone text-bone hover:bg-bone hover:text-ink sm:!px-7 sm:!py-3.5 sm:!text-sm sm:!tracking-widest2"
             >
-              Porozmawiajmy
+              <span className="sm:hidden">Kontakt</span>
+              <span className="hidden sm:inline">Porozmawiajmy</span>
             </Button>
           </div>
         </motion.div>
