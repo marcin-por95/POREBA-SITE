@@ -72,7 +72,7 @@ const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": ["ProfessionalService", "LocalBusiness"],
+      "@type": "LocalBusiness",
       "@id": `${site.url}/#business`,
       name: site.name,
       alternateName: ["Poręba Fotografia", "Poreba Fotografia", "Marcin Poręba Fotografia"],
