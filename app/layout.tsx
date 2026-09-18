@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { Fraunces, Manrope } from "next/font/google";
 import "./globals.css";
 import { site } from "@/data/site";
+import { services } from "@/data/services";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
@@ -28,9 +29,10 @@ export const metadata: Metadata = {
     template: `%s | ${site.name}`,
   },
   description: site.description,
-  authors: [{ name: site.owner }],
+  authors: [{ name: site.owner, url: `${site.url}/o-mnie` }],
   creator: site.owner,
   publisher: site.name,
+  category: "Fotografia",
   robots: {
     index: true,
     follow: true,
@@ -49,7 +51,14 @@ export const metadata: Metadata = {
     siteName: site.name,
     locale: "pl_PL",
     type: "website",
-    images: [{ url: `${site.url}/images/og/og-cover.jpg`, width: 1200, height: 630, alt: `${site.name} — fotograf Lublin` }],
+    images: [
+      {
+        url: `${site.url}/images/og/og-cover.jpg`,
+        width: 1200,
+        height: 630,
+        alt: `${site.name} — fotograf Lublin`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -63,16 +72,22 @@ const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": ["ProfessionalService", "LocalBusiness"],
+      "@type": "LocalBusiness",
       "@id": `${site.url}/#business`,
       name: site.name,
+      alternateName: ["Poręba Fotografia", "Poreba Fotografia", "Marcin Poręba Fotografia"],
       url: site.url,
       email: site.contact.email,
       image: `${site.url}/images/og/og-cover.jpg`,
       description: site.description,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: site.location.city,
+        addressRegion: site.location.region,
+        addressCountry: "PL",
+      },
       founder: {
-        "@type": "Person",
-        name: site.owner,
+        "@id": `${site.url}/#owner`,
       },
       areaServed: [
         {
@@ -80,18 +95,37 @@ const structuredData = {
           name: site.location.city,
         },
         {
+          "@type": "AdministrativeArea",
+          name: site.location.region,
+        },
+        {
           "@type": "Country",
           name: site.location.country,
         },
       ],
+      knowsAbout: services.map((service) => service.seoTitle),
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Usługi fotograficzne",
+        itemListElement: services.map((service) => ({
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: service.seoTitle,
+            url: `${site.url}/uslugi/${service.seoSlug}`,
+          },
+        })),
+      },
       sameAs: [site.contact.instagram.url],
     },
     {
       "@type": "Person",
       "@id": `${site.url}/#owner`,
       name: site.owner,
+      alternateName: "Marcin Poreba",
       jobTitle: "Fotograf",
       url: `${site.url}/o-mnie`,
+      image: `${site.url}/images/o-mnie/portret-autora.jpg`,
       sameAs: [site.contact.instagram.url],
       worksFor: {
         "@id": `${site.url}/#business`,
@@ -102,6 +136,7 @@ const structuredData = {
       "@id": `${site.url}/#website`,
       url: site.url,
       name: site.name,
+      alternateName: ["PØREBA", "Poręba Fotografia", "Poreba Fotografia"],
       inLanguage: "pl-PL",
       publisher: {
         "@id": `${site.url}/#business`,

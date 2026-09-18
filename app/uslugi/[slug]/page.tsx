@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import { services, getServiceBySeoSlug } from "@/data/services";
+import { projects } from "@/data/projects";
 import { site } from "@/data/site";
 import { buildMetadata } from "@/lib/metadata";
 
@@ -37,34 +38,56 @@ export default async function ServicePage({ params }: ServicePageProps) {
   if (!service) notFound();
 
   const serviceUrl = `${site.url}/uslugi/${service.seoSlug}`;
-  const portfolioHref = service.category === "content" ? "/portfolio/lifestyle" : `/portfolio/${service.category}`;
+  const portfolioHref =
+    service.category === "content" ? "/portfolio/lifestyle" : `/portfolio/${service.category}`;
+  const relatedProjects =
+    service.category === "content"
+      ? []
+      : projects.filter((project) => project.category === service.category).slice(0, 3);
 
-  const structuredData = [
-    {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      name: service.seoTitle,
-      description: service.metaDescription,
-      url: serviceUrl,
-      image: `${site.url}${service.image.src}`,
-      provider: {
-        "@id": `${site.url}/#business`,
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Service",
+        "@id": `${serviceUrl}#service`,
+        name: service.seoTitle,
+        serviceType: service.title,
+        description: service.metaDescription,
+        url: serviceUrl,
+        image: `${site.url}${service.image.src}`,
+        provider: {
+          "@id": `${site.url}/#business`,
+        },
+        areaServed: [
+          { "@type": "City", name: site.location.city },
+          { "@type": "AdministrativeArea", name: site.location.region },
+          { "@type": "Country", name: site.location.country },
+        ],
       },
-      areaServed: [
-        { "@type": "City", name: site.location.city },
-        { "@type": "Country", name: site.location.country },
-      ],
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Strona główna", item: site.url },
-        { "@type": "ListItem", position: 2, name: "Usługi", item: `${site.url}/uslugi` },
-        { "@type": "ListItem", position: 3, name: service.seoTitle, item: serviceUrl },
-      ],
-    },
-  ];
+      {
+        "@type": "FAQPage",
+        "@id": `${serviceUrl}#faq`,
+        mainEntity: service.faq.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.answer,
+          },
+        })),
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${serviceUrl}#breadcrumbs`,
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Strona główna", item: site.url },
+          { "@type": "ListItem", position: 2, name: "Usługi", item: `${site.url}/uslugi` },
+          { "@type": "ListItem", position: 3, name: service.seoTitle, item: serviceUrl },
+        ],
+      },
+    ],
+  };
 
   return (
     <article className="pb-24 pt-36 sm:pb-32 sm:pt-44">
@@ -81,7 +104,9 @@ export default async function ServicePage({ params }: ServicePageProps) {
             <p className="mt-6 max-w-xl text-lg text-stone">{service.shortDescription}</p>
             <div className="mt-9 flex flex-wrap gap-4">
               <Button href="/kontakt">Zapytaj o wycenę</Button>
-              <Button href={portfolioHref} variant="ghost">Zobacz portfolio →</Button>
+              <Button href={portfolioHref} variant="ghost">
+                Zobacz portfolio →
+              </Button>
             </div>
           </div>
 
@@ -100,11 +125,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
         <section className="mx-auto mt-24 max-w-3xl border-t border-mist/40 pt-14">
           <h2 className="text-display-3 font-light">Profesjonalna realizacja dopasowana do celu</h2>
           <p className="mt-6 text-lg leading-8 text-graphite">{service.description}</p>
-          <p className="mt-5 leading-7 text-stone">
-            Każdą sesję planuję pod konkretne miejsce publikacji: stronę internetową, Google Business Profile,
-            social media, materiały reklamowe, portale rezerwacyjne albo komunikację firmową. Dzięki temu kadry
-            powstają z myślą o ich realnym zastosowaniu, a nie tylko jako pojedyncze atrakcyjne zdjęcia.
-          </p>
+          <p className="mt-5 leading-7 text-stone">{service.contextDescription}</p>
         </section>
 
         <section className="mt-20 border-t border-mist/40 pt-14">
@@ -119,29 +140,64 @@ export default async function ServicePage({ params }: ServicePageProps) {
           </div>
         </section>
 
-        <section className="mt-20 grid gap-8 border-t border-mist/40 pt-14 md:grid-cols-3">
-          <div>
-            <span className="eyebrow text-stone">01</span>
-            <h3 className="mt-3 font-serif text-2xl">Brief i plan</h3>
-            <p className="mt-3 text-stone">Ustalamy cel materiału, miejsce publikacji, liczbę ujęć oraz charakter marki.</p>
-          </div>
-          <div>
-            <span className="eyebrow text-stone">02</span>
-            <h3 className="mt-3 font-serif text-2xl">Sesja</h3>
-            <p className="mt-3 text-stone">Realizuję zaplanowane kadry, dbając o światło, spójność i naturalny charakter materiału.</p>
-          </div>
-          <div>
-            <span className="eyebrow text-stone">03</span>
-            <h3 className="mt-3 font-serif text-2xl">Postprodukcja</h3>
-            <p className="mt-3 text-stone">Selekcjonuję i obrabiam zdjęcia tak, aby były gotowe do publikacji w ustalonych kanałach.</p>
+        <section className="mx-auto mt-20 max-w-3xl border-t border-mist/40 pt-14">
+          <h2 className="text-display-3 font-light">{service.detailsTitle}</h2>
+          <div className="mt-6 flex flex-col gap-5 leading-7 text-stone">
+            {service.detailsParagraphs.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
           </div>
         </section>
 
         <section className="mt-20 border-t border-mist/40 pt-14">
-          <h2 className="text-display-3 font-light">Realizacje w Lublinie i całej Polsce</h2>
-          <p className="mt-5 max-w-2xl text-stone">
-            Bazuję w Lublinie, ale realizuję sesje również poza województwem lubelskim. Przy większych projektach
-            zakres, harmonogram i dojazd ustalam indywidualnie przed realizacją.
+          <p className="eyebrow text-stone">Jak wygląda współpraca</p>
+          <div className="mt-8 grid gap-8 md:grid-cols-3">
+            {service.process.map((step, index) => (
+              <div key={step.title}>
+                <span className="eyebrow text-stone">{String(index + 1).padStart(2, "0")}</span>
+                <h3 className="mt-3 font-serif text-2xl">{step.title}</h3>
+                <p className="mt-3 leading-7 text-stone">{step.description}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {relatedProjects.length > 0 && (
+          <section className="mt-20 border-t border-mist/40 pt-14">
+            <p className="eyebrow text-stone">Realizacje</p>
+            <h2 className="mt-4 text-display-3 font-light">Zobacz podobne projekty</h2>
+            <div className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {relatedProjects.map((project) => (
+                <Link
+                  key={project.slug}
+                  href={`/realizacje/${project.slug}`}
+                  className="group block"
+                >
+                  <div className="relative aspect-[4/3] overflow-hidden bg-graphite/10">
+                    <Image
+                      src={project.coverImage.src}
+                      alt={project.coverImage.alt}
+                      fill
+                      sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                    />
+                  </div>
+                  <p className="mt-4 text-xs uppercase tracking-widest2 text-stone">
+                    {project.location} · {project.year}
+                  </p>
+                  <h3 className="mt-2 font-serif text-2xl">{project.title}</h3>
+                  <p className="mt-2 text-sm text-stone">Zobacz realizację →</p>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <section className="mt-20 border-t border-mist/40 pt-14">
+          <h2 className="text-display-3 font-light">Fotograf w Lublinie i realizacje w całej Polsce</h2>
+          <p className="mt-5 max-w-2xl leading-7 text-stone">
+            Bazuję w Lublinie i tutaj realizuję większość lokalnych sesji, ale pracuję również poza województwem
+            lubelskim. Przy projektach wyjazdowych zakres, harmonogram i dojazd ustalam indywidualnie przed realizacją.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <Link href={portfolioHref} className="link-underline text-sm uppercase tracking-widest2">
@@ -150,6 +206,24 @@ export default async function ServicePage({ params }: ServicePageProps) {
             <Link href="/realizacje" className="link-underline text-sm uppercase tracking-widest2">
               Zobacz pełne realizacje →
             </Link>
+          </div>
+        </section>
+
+        <section className="mx-auto mt-20 max-w-3xl border-t border-mist/40 pt-14">
+          <p className="eyebrow text-stone">FAQ</p>
+          <h2 className="mt-4 text-display-3 font-light">Najczęstsze pytania</h2>
+          <div className="mt-8 divide-y divide-mist/40 border-y border-mist/40">
+            {service.faq.map((item) => (
+              <details key={item.question} className="group py-6">
+                <summary className="cursor-pointer list-none pr-8 font-serif text-xl">
+                  {item.question}
+                  <span className="float-right text-stone transition-transform group-open:rotate-45" aria-hidden>
+                    +
+                  </span>
+                </summary>
+                <p className="mt-4 max-w-2xl leading-7 text-stone">{item.answer}</p>
+              </details>
+            ))}
           </div>
         </section>
 

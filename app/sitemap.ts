@@ -4,9 +4,9 @@ import { projects } from "@/data/projects";
 import { services } from "@/data/services";
 import { categoryOrder } from "@/types/project";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
+const SEO_UPDATE = new Date("2026-09-18T00:00:00+02:00");
 
+export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     { path: "", priority: 1 },
     { path: "/portfolio", priority: 0.9 },
@@ -18,28 +18,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/cookies", priority: 0.2 },
   ].map(({ path, priority }) => ({
     url: `${site.url}${path}`,
-    lastModified: now,
+    lastModified: SEO_UPDATE,
     changeFrequency: "monthly" as const,
     priority,
   }));
 
   const serviceRoutes = services.map((service) => ({
     url: `${site.url}/uslugi/${service.seoSlug}`,
-    lastModified: now,
+    lastModified: SEO_UPDATE,
     changeFrequency: "monthly" as const,
     priority: 0.9,
   }));
 
   const portfolioRoutes = categoryOrder.map((category) => ({
     url: `${site.url}/portfolio/${category}`,
-    lastModified: now,
+    lastModified: SEO_UPDATE,
     changeFrequency: "monthly" as const,
     priority: 0.8,
   }));
 
   const projectRoutes = projects.map((project) => ({
     url: `${site.url}/realizacje/${project.slug}`,
-    lastModified: now,
+    lastModified: SEO_UPDATE,
     changeFrequency: "yearly" as const,
     priority: 0.8,
   }));

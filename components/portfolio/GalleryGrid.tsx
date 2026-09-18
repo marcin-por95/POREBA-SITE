@@ -27,10 +27,10 @@ export default function GalleryGrid({ images }: { images: PortfolioImage[] }) {
               src={image.src}
               alt={image.alt}
               fill
+              priority={idx === 0}
               sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
               className="object-cover transition-transform duration-[1100ms] ease-editorial group-hover:scale-[1.04]"
               placeholder="empty"
-              loading={idx < 4 ? "eager" : "lazy"}
             />
             <div className="absolute inset-0 bg-ink/0 transition-colors duration-500 group-hover:bg-ink/10" />
           </button>

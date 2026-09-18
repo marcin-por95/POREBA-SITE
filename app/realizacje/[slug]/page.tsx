@@ -10,13 +10,23 @@ import {
   getProjectBySlug,
   projects,
 } from "@/data/projects";
-import { categoryLabels } from "@/types/project";
+import { site } from "@/data/site";
+import { categoryLabels, type ProjectCategory } from "@/types/project";
 import { buildMetadata } from "@/lib/metadata";
 
 type ProjectPageProps = {
   params: Promise<{
     slug: string;
   }>;
+};
+
+const serviceLinks: Record<ProjectCategory, string> = {
+  portret: "/uslugi/fotografia-portretowa-lublin",
+  gastronomia: "/uslugi/fotografia-gastronomiczna-lublin",
+  wnetrza: "/uslugi/fotografia-wnetrz-lublin",
+  event: "/uslugi/fotografia-eventowa-lublin",
+  biznes: "/uslugi/fotografia-biznesowa-lublin",
+  lifestyle: "/uslugi/content-social-media-lublin",
 };
 
 export function generateStaticParams() {
@@ -54,14 +64,51 @@ export default async function ProjectPage({
   }
 
   const next = getAdjacentProject(project.slug);
+  const projectUrl = `${site.url}/realizacje/${project.slug}`;
 
   const galleryImages = project.gallery.map((img) => ({
     ...img,
     category: project.category,
   }));
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ImageGallery",
+        "@id": `${projectUrl}#gallery`,
+        name: project.title,
+        description: project.description,
+        url: projectUrl,
+        inLanguage: "pl-PL",
+        creator: {
+          "@id": `${site.url}/#owner`,
+        },
+        image: [project.coverImage, ...project.gallery].map((image) => ({
+          "@type": "ImageObject",
+          contentUrl: `${site.url}${image.src}`,
+          caption: image.alt,
+        })),
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${projectUrl}#breadcrumbs`,
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Strona główna", item: site.url },
+          { "@type": "ListItem", position: 2, name: "Realizacje", item: `${site.url}/realizacje` },
+          { "@type": "ListItem", position: 3, name: project.title, item: projectUrl },
+        ],
+      },
+    ],
+  };
+
   return (
     <article className="pb-24 pt-32 sm:pb-32 sm:pt-40">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }}
+      />
+
       <div className="relative h-[60vh] min-h-[420px] w-full overflow-hidden bg-graphite">
         <Image
           src={project.coverImage.src}
@@ -101,6 +148,15 @@ export default async function ProjectPage({
               <dd className="mt-1">{project.location}</dd>
             </div>
           </dl>
+
+          <div className="mt-8">
+            <Link
+              href={serviceLinks[project.category]}
+              className="link-underline text-sm uppercase tracking-widest2"
+            >
+              Zobacz powiązaną usługę →
+            </Link>
+          </div>
         </RevealOnScroll>
 
         <div className="mt-16">
