@@ -9,6 +9,33 @@ import type { Project } from "@/types/project";
  */
 export const projects: Project[] = [
   {
+    title: "Miejska sesja ślubna — Lublin",
+    slug: "sesja-slubna-lublin",
+    category: "pary",
+    client: "Sesja dla pary",
+    location: "Lublin",
+    year: 2026,
+    description:
+      "Naturalna sesja ślubna w przestrzeni Lublina — miejski klimat, ruch i emocje bez sztywnych póz. Reportażowe i editorialowe kadry tworzą spójną historię pary.",
+    coverImage: {
+      src: "/images/projekty/sesja-slubna-lublin/cover.jpg",
+      width: 800,
+      height: 1200,
+      alt: "Para młoda spacerująca ulicami Lublina podczas sesji ślubnej",
+    },
+    gallery: [
+      { src: "/images/projekty/sesja-slubna-lublin/g-1.jpg", width: 900, height: 1200, alt: "Naturalny portret pary młodej podczas sesji ślubnej w Lublinie" },
+      { src: "/images/projekty/sesja-slubna-lublin/g-2.jpg", width: 1062, height: 1200, alt: "Dynamiczny kadr pary młodej z rozwianym welonem w Lublinie" },
+      { src: "/images/projekty/sesja-slubna-lublin/g-3.jpg", width: 900, height: 1200, alt: "Editorialowy portret pary młodej fotografowanej przez welon", featuredInGrid: true },
+      { src: "/images/projekty/sesja-slubna-lublin/g-4.jpg", width: 900, height: 1200, alt: "Pocałunek pary młodej podczas plenerowej sesji ślubnej" },
+      { src: "/images/projekty/sesja-slubna-lublin/g-5.jpg", width: 1200, height: 800, alt: "Czarno-biały kadr pary młodej z panoramą Lublina", featuredInGrid: true },
+      { src: "/images/projekty/sesja-slubna-lublin/g-6.jpg", width: 900, height: 1200, alt: "Portret pary młodej na ulicach Starego Miasta w Lublinie" },
+      { src: "/images/projekty/sesja-slubna-lublin/g-7.jpg", width: 800, height: 1200, alt: "Portret panny młodej podczas sesji ślubnej w Lublinie" },
+    ],
+    featured: true,
+    order: 1,
+  },
+  {
     title: "Hotel Alter — Lublin",
     slug: "hotel-alter-lublin",
     category: "wnetrza",
