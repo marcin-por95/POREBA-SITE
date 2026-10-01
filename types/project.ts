@@ -10,7 +10,8 @@ export type ProjectCategory =
   | "wnetrza"
   | "event"
   | "biznes"
-  | "lifestyle";
+  | "lifestyle"
+  | "pary";
 
 export interface GalleryImage {
   /** Ścieżka względem /public lub przyszły URL z Sanity CDN */
@@ -45,6 +46,7 @@ export const categoryLabels: Record<ProjectCategory, string> = {
   event: "Event",
   biznes: "Biznes",
   lifestyle: "Lifestyle",
+  pary: "Pary / Ślub",
 };
 
 export const categoryOrder: ProjectCategory[] = [
@@ -54,4 +56,5 @@ export const categoryOrder: ProjectCategory[] = [
   "event",
   "biznes",
   "lifestyle",
+  "pary",
 ];
