@@ -4,7 +4,7 @@ import { projects } from "@/data/projects";
 import { services } from "@/data/services";
 import { categoryOrder } from "@/types/project";
 
-const SEO_UPDATE = new Date("2026-09-18T00:00:00+02:00");
+const SEO_UPDATE = new Date("2026-10-01T00:00:00+02:00");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
