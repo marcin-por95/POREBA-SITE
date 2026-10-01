@@ -27,6 +27,7 @@ const serviceLinks: Record<ProjectCategory, string> = {
   event: "/uslugi/fotografia-eventowa-lublin",
   biznes: "/uslugi/fotografia-biznesowa-lublin",
   lifestyle: "/uslugi/content-social-media-lublin",
+  pary: "/kontakt",
 };
 
 export function generateStaticParams() {
@@ -154,7 +155,7 @@ export default async function ProjectPage({
               href={serviceLinks[project.category]}
               className="link-underline text-sm uppercase tracking-widest2"
             >
-              Zobacz powiązaną usługę →
+              {project.category === "pary" ? "Zapytaj o sesję →" : "Zobacz powiązaną usługę →"}
             </Link>
           </div>
         </RevealOnScroll>
