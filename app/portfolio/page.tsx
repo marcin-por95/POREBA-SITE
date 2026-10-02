@@ -10,7 +10,7 @@ import { buildMetadata } from "@/lib/metadata";
 export const metadata: Metadata = buildMetadata({
   title: "Portfolio fotografa Lublin",
   description:
-    "Portfolio fotografa z Lublina: fotografia gastronomiczna, wnętrz i hoteli, biznesowa, portretowa, eventowa i lifestyle. Zobacz wybrane realizacje.",
+    "Portfolio fotografa z Lublina: sesje dla par i ślubne, fotografia gastronomiczna, wnętrz i hoteli, biznesowa, portretowa, eventowa i lifestyle. Zobacz wybrane realizacje.",
   path: "/portfolio",
 });
 
@@ -24,7 +24,7 @@ export default function PortfolioPage() {
           as="h1"
           eyebrow="Portfolio"
           title="Portfolio fotografa — Lublin"
-          description="Gastronomia, wnętrza i hotele, biznes, portret, event i lifestyle — wybierz kategorię albo zobacz pełną galerię."
+          description="Pary i śluby, gastronomia, wnętrza i hotele, biznes, portret, event i lifestyle — wybierz kategorię albo zobacz pełną galerię."
         />
 
         <nav aria-label="Kategorie portfolio" className="mt-10 flex flex-wrap gap-3">
