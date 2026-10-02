@@ -33,6 +33,10 @@ const categorySeo: Record<ProjectCategory, { title: string; description: string 
     title: "Fotografia lifestyle Lublin — portfolio",
     description: "Portfolio fotografii lifestyle i contentu dla marek w Lublinie. Zdjęcia do social media, kampanii i komunikacji wizerunkowej.",
   },
+  pary: {
+    title: "Sesje dla par i ślubne Lublin — portfolio",
+    description: "Naturalne sesje dla par, narzeczonych i sesje ślubne w Lublinie. Emocje, ruch i miejski klimat bez sztywnych póz.",
+  },
 };
 
 type PortfolioCategoryPageProps = {

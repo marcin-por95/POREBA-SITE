@@ -12,6 +12,7 @@ const categoryCovers: Record<string, string> = {
   event: "/images/event/event-01.jpg",
   biznes: "/images/biznes/biznes-01.jpg",
   lifestyle: "/images/lifestyle/lifestyle-01.jpg",
+  pary: "/images/projekty/sesja-slubna-lublin/cover.jpg",
 };
 
 export default function Categories() {
@@ -20,7 +21,7 @@ export default function Categories() {
       <Container>
         <SectionHeading
           eyebrow="Specjalizacje"
-          title="Sześć obszarów, jedno spojrzenie"
+          title="Siedem obszarów, jedno spojrzenie"
           description="Każda kategoria to inny kontekst, ale ten sam sposób patrzenia na światło i kompozycję."
           className="[&_h2]:text-bone [&_p]:text-bone/70"
         />

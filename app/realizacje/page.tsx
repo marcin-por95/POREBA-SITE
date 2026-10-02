@@ -11,7 +11,7 @@ import { buildMetadata } from "@/lib/metadata";
 export const metadata: Metadata = buildMetadata({
   title: "Realizacje fotograficzne Lublin",
   description:
-    "Wybrane realizacje fotograficzne PØREBA Fotografia: hotele, restauracje, sesje portretowe i eventy firmowe w Lublinie oraz całej Polsce.",
+    "Wybrane realizacje fotograficzne PØREBA Fotografia: sesje dla par i ślubne, hotele, restauracje, portrety oraz eventy w Lublinie i całej Polsce.",
   path: "/realizacje",
 });
 
@@ -25,7 +25,7 @@ export default function RealizacjePage() {
           as="h1"
           eyebrow="Realizacje"
           title="Realizacje fotograficzne — Lublin i cała Polska"
-          description="Pełne historie wybranych współprac: hotele, restauracje, portrety i wydarzenia — od briefu, przez sesję, po gotowy materiał."
+          description="Pełne historie wybranych sesji i współprac: pary, śluby, hotele, restauracje, portrety i wydarzenia — od pomysłu po gotowy materiał."
         />
 
         <div className="mt-16 flex flex-col divide-y divide-mist/40">
