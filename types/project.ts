@@ -33,6 +33,8 @@ export interface Project {
   year: number;
   description: string;
   coverImage: GalleryImage;
+  /** Opcjonalne, niezależne zdjęcie nagłówkowe dla szerokiego hero realizacji */
+  heroImage?: GalleryImage;
   gallery: GalleryImage[];
   featured: boolean;
   /** Kolejność wyświetlania — mniejsze wartości wyżej/wcześniej */

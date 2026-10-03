@@ -49,7 +49,7 @@ export async function generateMetadata({
     title: project.title,
     description: project.description,
     path: `/realizacje/${project.slug}`,
-    image: project.coverImage.src,
+    image: (project.heroImage ?? project.coverImage).src,
   });
 }
 
@@ -85,7 +85,7 @@ export default async function ProjectPage({
         creator: {
           "@id": `${site.url}/#owner`,
         },
-        image: [project.coverImage, ...project.gallery].map((image) => ({
+        image: [project.heroImage ?? project.coverImage, project.coverImage, ...project.gallery].map((image) => ({
           "@type": "ImageObject",
           contentUrl: `${site.url}${image.src}`,
           caption: image.alt,
@@ -112,12 +112,12 @@ export default async function ProjectPage({
 
       <div className="relative h-[60vh] min-h-[420px] w-full overflow-hidden bg-graphite">
         <Image
-          src={project.coverImage.src}
-          alt={project.coverImage.alt}
+          src={(project.heroImage ?? project.coverImage).src}
+          alt={(project.heroImage ?? project.coverImage).alt}
           fill
           priority
           sizes="100vw"
-          className="object-cover"
+          className="object-cover object-center"
         />
 
         <div className="absolute inset-0 bg-ink/30" />
