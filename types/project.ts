@@ -56,5 +56,4 @@ export const categoryOrder: ProjectCategory[] = [
   "event",
   "biznes",
   "lifestyle",
-  "pary",
 ];
